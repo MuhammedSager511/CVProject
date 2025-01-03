@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyProject.styles.css" asp-append-version="true" />
+    <style>
+        /* تحسين تصميم القائمة الجانبية */
+        /* تحسين تصميم القائمة الجانبية */
+        nav {
+            background: linear-gradient(135deg, #4e5b6e, #2f3b47); /* تدرج لوني بين الأزرق الداكن والرمادي */
+            color: #fff;
+            font-size: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* توسيط العناصر عموديًا */
+            padding: 20px 0;
+        }
+
+            nav img {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%; /* جعل الصورة دائرية */
+                margin: 20px 0;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            nav ul {
+                width: 100%;
+                padding: 0;
+                list-style: none;
+            }
+
+            nav .nav-item {
+                margin-bottom: 15px;
+            }
+
+            nav .nav-link {
+                color: #f4f4f4;
+                text-align: center;
+                padding: 12px;
+                border-radius: 30px;
+                background: rgba(255, 255, 255, 0.1);
+                transition: all 0.4s ease;
+                font-weight: bold;
+            }
+
+                nav .nav-link:hover {
+                    background: #b3c2b2; /* لون مائل إلى الأخضر الفاتح عند التمرير */
+                    color: #2c6e49;
+                    transform: scale(1.1);
+                }
+
+        /* تأثيرات زر نشط */
+        .nav-link.active {
+            background: #b3c2b2;
+            color: #2c6e49;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* تصميم الفوتر */
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #4e5b6e, #2f3b47);
+            color: #e3ffe6;
+            padding: 15px 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+            .fixed-footer a {
+                color: #b3e4c2;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .fixed-footer a:hover {
+                    color: #fff;
+                }
+
+        /* تصميم المحتوى الرئيسي */
+        main {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+
+        /* تحسين الخطوط */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eaf6f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* تأثيرات زر نشط */
+        .nav-link.active {
+            background: #e3ffe6;
+            color: #2c6e49;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container-fluid{
+            position: fixed;
+            font-size: 0.9rem;
+         
+            z-index: 1000;
+        
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- القائمة الجانبية -->
+                <nav class="col-md-3 col-lg-2 vh-100">
+                    <img src="~/img/sager.webp" alt="Logo" />
+
+                    <ul class="navbar-nav w-100">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Profiles" asp-action="Index">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="AddProjects" asp-action="Index">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Educations" asp-action="Index">Educations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Skills" asp-action="Index">Skills & Hobbies</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <partial name="_LoginPartial" />
+                            </li>
+                        }
+                    </ul>
+                </nav>
+
+                <!-- المحتوى الرئيسي -->
+                <main class="col-md-9 col-lg-10">
+                    <div class="container">
+                        <!-- عرض المحتوى الأساسي -->
+                        <main role="main" class="pb-3">
+                            @RenderBody()
+                        </main>
+
+                        <!-- أقسام إضافية اختيارية -->
+                        @RenderSection("AdditionalContent", required: false)
+                    </div>
+                </main>
+            </div>
+        </div>
+    </header>
+
+    <!-- الفوتر -->
+    <footer class="fixed-footer">
+        <div class="container">
+            &copy; 2024 - MyProject - <a asp-area="" asp-controller="Profiles" asp-action="Index">Profile</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".nav-link");
+            links.forEach(link => {
+                link.addEventListener("click", function () {
+                    links.forEach(l => l.classList.remove("active")); // إزالة الفئة النشطة
+                    this.classList.add("active"); // إضافة الفئة النشطة
+                });
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
